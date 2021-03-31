@@ -1,0 +1,118 @@
+# include<iostream>
+# include<string.h>
+
+using namespace std;
+
+class Account
+	{
+	char name[20];
+	int acno;
+	string IFSC;
+	char actype[4];
+	float balance;
+	int branch_code;
+	public:
+	// Constuctor
+	Account()
+	{
+		cout<<"Constructor Invoked !"<<endl;
+		acno = 0000;
+		balance = 0.0;
+		IFSC = "SBI00136400";
+		branch_code =963540;
+    }
+    //some other member functions declaration
+	void setdata();
+	void deposit();
+	void withdraw();
+	void calculate_interest();
+	void display_details();
+	};
+//member functions of Account class
+void Account :: setdata()
+{
+cout<<"** New Account **"<<endl;
+cout<<"Enter the Name of the depositor : ";
+cin.get(name,19,'0');
+cout<<"Enter the Account Number : ";
+cin>>acno;
+cout<<"Enter the Account Type : (CURR/SAVG/FD/RD/DMAT) ";
+cin>>actype;
+cout<<"Enter the Amount to Deposit : ";
+cin >>balance;
+}
+void Account :: deposit()
+{
+float more;
+cout <<"** Depositing **"<<endl;
+cout<<"  Enter the amount to deposit : ";
+cin>>more;
+balance+=more;
+cout<<"\n THe new balance is :"<<balance<<endl;
+}
+void Account :: withdraw()
+{
+float amt;
+cout<<"** Withdrwal **"<<endl;
+cout<<"  Enter the amount to withdraw : ";
+cin>>amt;
+if(amt>balance)
+{
+    cout<<"\n Sorry.. insufficient balance"<<endl;
+}
+else
+{
+    balance=balance-amt;
+    cout<<"\nThe new balance id "<< balance<<endl;
+}
+}
+void Account:: calculate_interest()
+{
+ int t;
+ float interest;
+ cout<<" Enter the time interval in year:  ";
+ cin>>t;
+ interest =  balance * (1+2*t);
+ cout<<" Interest is:"<<interest<<endl;
+}
+void Account :: display_details()
+{
+cout<<"** Account Details **"<<endl;
+cout<<" Name of the depositor : "<<name;
+cout<<" Account Number        : "<<acno<<endl;
+cout<<" IFSC code             : "<<IFSC<<endl;
+cout<<" Branch code           : "<<branch_code<<endl;
+cout<<" Account Type          : "<<actype<<endl;
+cout<<" Balance               : $"<<balance<<endl;
+}
+// main function , execution starts here
+int main(void)
+{
+Account obj;
+
+int choice  = 1;
+while (choice != 0 )
+{
+cout<<"\nChoose the number that which operation you want to perform:"<<endl;
+cout<<"Enter 0 to exit    1. Initialize a new acc.    2. Deposit     3. Withdraw     4. Calculate Interest    5. See A/c Status : `" ;
+cin>>choice;
+switch(choice)
+{
+	case 0 :obj.display_details();
+		cout<<"EXITING PROGRAM.";
+		break;
+	case 1 : obj.setdata();
+		break;
+	case 2: obj.deposit();
+		break;
+	case 3 : obj.withdraw();
+		break;
+    case 4: obj.calculate_interest();
+        break;
+	case 5: obj.display_details();
+		break;
+	default: cout<<"Illegal Option"<<endl;
+}
+}
+return 0;
+}
